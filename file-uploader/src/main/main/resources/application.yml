@@ -1,0 +1,20 @@
+server:
+  port: 8801
+spring:
+  application:
+    name: file-uploader
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 20MB
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/uploader?serverTimezone=UTC&characterEncodeing=UTF-8
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+upload:
+  file:
+    path: E:/fileChunk/
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.uploader.model

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.uploader.dao.FileChunkDao">
+
+    <resultMap id="BaseResultMap" type="com.example.uploader.model.FileChunk">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="total_chunks" jdbcType="INTEGER" property="totalChunks"/>
+        <result column="chunk_number" jdbcType="INTEGER" property="chunkNumber"/>
+        <result column="identifier" jdbcType="VARCHAR" property="identifier"/>
+        <result column="file_name" jdbcType="VARCHAR" property="filename"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+    </resultMap>
+
+    <select id="getEntity" resultType="com.example.uploader.model.FileChunk">
+        select * from t_file_chunk where id = #{id}
+    </select>
+
+    <select id="getEntityByKey" parameterType="com.example.uploader.model.FileChunk"
+            resultType="com.example.uploader.model.FileChunk">
+        select * from t_file_chunk
+        where identifier = #{identifier}
+        and chunk_number = #{chunkNumber}
+        and file_name = #{filename}
+        and is_deleted = 0
+    </select>
+
+    <insert id="insertEntity" parameterType="com.example.uploader.model.FileChunk" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_file_chunk
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="totalChunks != null">total_chunks,</if>
+            <if test="chunkNumber != null">chunk_number,</if>
+            <if test="identifier != null">identifier,</if>
+            <if test="filename != null">file_name,</if>
+            <if test="type != null">type,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="totalChunks != null">#{totalChunks},</if>
+            <if test="chunkNumber != null">#{chunkNumber},</if>
+            <if test="identifier != null">#{identifier},</if>
+            <if test="filename != null">#{filename},</if>
+            <if test="type != null">#{type},</if>
+        </trim>
+    </insert>
+
+</mapper>
