@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * 返回前端的实体对象
- * @author chuanyuan.qu@ ucarinc.com
+ * @author nurhier
  */
 @Data
 public class ResultMsgData<T>{
